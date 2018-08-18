@@ -4,14 +4,12 @@ import PerformanceCard from '../../component/PerformanceCard/PerformanceCard';
 
 const PerformList = ({data})=>{
 
-    //  console.log("performList",data);
+     console.log("performListData",data);
     //  console.log("performList",data.length); 
-    // console.log(data[0].performInfo)
-    const listOfDate = data.map((info,index)=>{
-        console.log(info);
-        console.log(index);
-        return <PerformanceCard key={index} date = {info.date} performList = {info.performInfo}></PerformanceCard>
-
+    let dateData = data;
+    let listOfDate = dateData.map((info,index)=>{
+        // console.log("PerformList js info : ",info.performInfo);
+        return <PerformanceCard key={index} date = {info.date} performInfo = {info.performInfo}></PerformanceCard>
     })
 
     return (
