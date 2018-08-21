@@ -21,6 +21,7 @@ class InfoContainer extends Component {
     handleChange=(e)=>{
         // alert("change Store");
         // console.log(e.target.value);
+        debugger;
         let filterID = e.target.value;
         let performData = this.state.origin_performData;
         // console.log("filterData : ",performData)
@@ -114,7 +115,8 @@ class InfoContainer extends Component {
         this.setState({
             storeInfo: this.state.storeInfo,
             origin_performData: performData,
-            storeList :storeList
+            storeList :storeList,
+            filter_performData:[]
         });
         
     }

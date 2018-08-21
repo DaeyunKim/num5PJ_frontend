@@ -38,7 +38,7 @@ import PropTypes from 'prop-types';
 
 const PerformanceCard = ({date,performInfo})=>{
 
-    console.log(" inside card performInfo : ",performInfo)
+    console.log(" inside card performInfo : ",date,performInfo)
     const dateTitle = (<h1>{date}</h1>);
     const performlist = performInfo.map((name,index)=>{
         // console.log(name)
