@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import InfoWrapper from '../../component/InfoWrapper/InfoWrapper';
 import PerformList from '../../component/PerformList/PerformList';
 import TableComponent from '../../component/TableComponent/TableComponent';
+import data from '../../data/data.json';
 class InfoContainer extends Component {
     
     constructor(props){
@@ -38,7 +39,7 @@ class InfoContainer extends Component {
                  var performFilter = d.performInfo.filter((perform)=>perform.location===e.target.value);
                  let data = {
                      date: d.date,
-                     performData:  performFilter
+                     performInfo:  performFilter
                  }
                 //  console.log("pre: ", data);
                  return data;
@@ -59,8 +60,8 @@ class InfoContainer extends Component {
     // }
 
     //rendering하기 전에 state에 데이터 삽입
-    // loadData=()=>{
-    componentDidMount(){
+    loadData=()=>{
+    // componentWillMount(){
         console.log("loadData");
             const performData = [
                 {
@@ -107,7 +108,7 @@ class InfoContainer extends Component {
                 }
             ]
             //데이터베이스에서 가게에 대한 정보만 가지고오는방법 vs 일자별 정보를 가지고와서 javascript에서 필터할때
-            const storeList = ["전체","jazz Alley","all that jazz"] 
+            const storeList = ["전체","jazz Alley","all that jazz"] ;
 
             // console.log(storeList);
             // console.log(performData);
@@ -122,27 +123,26 @@ class InfoContainer extends Component {
             
     }
 
+    loadDataFile = ()=>{
+        console.log("loadData");
+        //가게 이름 정보 
+        const storeList = ["전체","jazz Alley","all that jazz"] ;
+        console.log("1",data.result[0]);
+        this.setState({
+            storeInfo: this.state.storeInfo,
+            origin_performData: data.result,
+            storeList :storeList,
+            filter_performData:[]
+        });
+    }
+    componentWillMount(){
+        this.loadDataFile();
+    }
     render() {
-        // When it using Table Components
-        // const performInfo = 
-        // {
-        //     columns: ['날짜', '공연', '아티스트', '장소'],
-        //     rows: [{
-        //     'Service': 'Veterinary Assitance',
-        //     'Cost/Unit': 50,
-        //     'Unit': '1 Hour',
-        //     'Units Requested': 12
-        //     }, {
-        //     'Service': 'Veterinary Assitance',
-        //     'Cost/Unit': 50,
-        //     'Unit': '1 Hour',
-        //     'Units Requested': 12
-        //     }]
-        // }
-
-
+ 
         // this.loadData();
         console.log("render : state : ",this.state);
+        // this.loadDataFile();
         // console.log("origin : ",this.state.origin_performData);
         // console.log("filter",this.state.filter_performData);
 
@@ -155,14 +155,14 @@ class InfoContainer extends Component {
 
         const filter_Data = ()=>{
             if(this.state.storeInfo==="전체"){
-
+                console.log("after Filter",this.state.filter_performData);
                 return <PerformList data = {this.state.origin_performData}></PerformList>;
             }else{
                 console.log("after Filter",this.state.filter_performData);
                 return <PerformList data = {this.state.filter_performData}></PerformList>;
             }
         }
-
+        
         // console.log("truefalse : ",(this.state.storeInfo==="전체"),this.state.filter_performData)
         // console.log("필터 선택 데이터 : ",filterData)
         return (   
