@@ -47,6 +47,6 @@ const PerformList = ({data})=>{
 // }
 export default PerformList;
 
-PerformList.PropTypes = {
+PerformList.propTypes = {
     data:PropTypes.array
 }

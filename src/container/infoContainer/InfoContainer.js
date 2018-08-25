@@ -54,71 +54,72 @@ class InfoContainer extends Component {
       
 
     }
-    componentDidMount(){
+    // componentDidMount(){
 
-    }
+    // }
 
     //rendering하기 전에 state에 데이터 삽입
-    componentWillMount(){
-
-        const performData = [
-            {
-               date: new Date('2018-08-10').toLocaleDateString('se'),
-               performInfo : [
-                   {
-                    PerformanceName : 'Sloppy notes',
-                    location : 'jazz Alley'
-                   },
-                   {
-                    PerformanceName : 'Brass Monkeys ',
-                    location : 'all that jazz'
-                   },
-                   {
-                    PerformanceName : 'Wave',
-                    location : 'all that jazz'
-                   },
-                   {
-                    PerformanceName : 'Sloppy notes',
-                    location : 'jazz Alley'
-                   }
-               ] 
-            },
-            {
-                date: new Date('2018-08-11').toLocaleDateString('se'),
+    // loadData=()=>{
+    componentDidMount(){
+        console.log("loadData");
+            const performData = [
+                {
+                date: new Date('2018-08-10').toLocaleDateString('se'),
                 performInfo : [
                     {
-                     PerformanceName : 'Sloppy notes',
-                     location : 'jazz Alley'
+                        PerformanceName : 'Sloppy notes',
+                        location : 'jazz Alley'
                     },
                     {
-                     PerformanceName : 'Brass Monkeys ',
-                     location : 'all that jazz'
+                        PerformanceName : 'Brass Monkeys ',
+                        location : 'all that jazz'
                     },
                     {
-                     PerformanceName : 'Wave',
-                     location : 'all that jazz'
+                        PerformanceName : 'Wave',
+                        location : 'all that jazz'
                     },
                     {
-                     PerformanceName : 'Sloppy notes',
-                     location : 'jazz Alley'
+                        PerformanceName : 'Sloppy notes',
+                        location : 'jazz Alley'
                     }
                 ] 
-             }
-        ]
-        //데이터베이스에서 가게에 대한 정보만 가지고오는방법 vs 일자별 정보를 가지고와서 javascript에서 필터할때
-        const storeList = ["전체","jazz Alley","all that jazz"] 
+                },
+                {
+                    date: new Date('2018-08-11').toLocaleDateString('se'),
+                    performInfo : [
+                        {
+                        PerformanceName : 'Sloppy notes',
+                        location : 'jazz Alley'
+                        },
+                        {
+                        PerformanceName : 'Brass Monkeys ',
+                        location : 'all that jazz'
+                        },
+                        {
+                        PerformanceName : 'Wave',
+                        location : 'all that jazz'
+                        },
+                        {
+                        PerformanceName : 'Sloppy notes',
+                        location : 'jazz Alley'
+                        }
+                    ] 
+                }
+            ]
+            //데이터베이스에서 가게에 대한 정보만 가지고오는방법 vs 일자별 정보를 가지고와서 javascript에서 필터할때
+            const storeList = ["전체","jazz Alley","all that jazz"] 
 
-        // console.log(storeList);
-        // console.log(performData);
-        // console.log(storeInfo);
+            // console.log(storeList);
+            // console.log(performData);
+            // console.log(storeInfo);
 
-        this.setState({
-            storeInfo: this.state.storeInfo,
-            origin_performData: performData,
-            storeList :storeList,
-            filter_performData:[]
-        });
-        
+            this.setState({
+                storeInfo: this.state.storeInfo,
+                origin_performData: performData,
+                storeList :storeList,
+                filter_performData:[]
+            });
+            
     }
 
     render() {
@@ -138,6 +139,9 @@ class InfoContainer extends Component {
         //     'Units Requested': 12
         //     }]
         // }
+
+
+        // this.loadData();
         console.log("render : state : ",this.state);
         // console.log("origin : ",this.state.origin_performData);
         // console.log("filter",this.state.filter_performData);
