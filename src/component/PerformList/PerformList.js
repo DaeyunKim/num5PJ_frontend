@@ -6,10 +6,7 @@ const PerformList = ({data})=>{
 
      console.log("performListData",data);
     //  console.log("performList",data.length); 
-    // let dateData = data;
-    data.forEach((element,index)=>{
-        console.log("element",index,element)
-    });
+
     let listOfDate = data.map((info,index)=>{
         console.log("PerformList js info : ",info);
         return <PerformanceCard key={index} date = {info.date} performInfo = {info.performInfo}></PerformanceCard>
