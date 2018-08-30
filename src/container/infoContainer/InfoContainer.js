@@ -3,6 +3,7 @@ import InfoWrapper from '../../component/InfoWrapper/InfoWrapper';
 import PerformList from '../../component/PerformList/PerformList';
 import TableComponent from '../../component/TableComponent/TableComponent';
 import data from '../../data/data.json';
+import axios from 'axios';
 class InfoContainer extends Component {
     
     constructor(props){
@@ -127,16 +128,36 @@ class InfoContainer extends Component {
         console.log("loadData");
         //가게 이름 정보 
         const storeList = ["전체","jazz Alley","all that jazz"] ;
-        console.log("1",data.result[0]);
+        console.log("1",data.result);
+        var orinData=null;
+        axios.get("http://localhost:3001/jazz")
+        .then(res=>{
+            console.log(res.data);
+            orinData = res.data;
+        })
+        .catch(error=>console.log(error));
         this.setState({
             storeInfo: this.state.storeInfo,
-            origin_performData: data.result,
+            origin_performData: orinData,
             storeList :storeList,
             filter_performData:[]
         });
     }
+    //backend에서 불러오기
+    loadDatafromBack=()=>{
+        //await 로 불러오기 
+        // fetch("http://localhost:3001/jazz")
+        // .then((res)=>console.log(res.json()))
+        // .catch(err=>console.log(err));
+        const url = "http://localhost:3001/jazz";
+        return axios.get(url)
+    }
     componentWillMount(){
-        this.loadDataFile();
+        this.loadData();
+        // this.loadDataFile();
+        //await
+        // const data = this.loadDatafromBack();
+        // console.log("init Data : ",data)
     }
     render() {
  
@@ -150,9 +171,6 @@ class InfoContainer extends Component {
             return <option key={index} value={d}>{d}</option>
         })
         //filter로 할지 아니면 전체로 할지 정하기 
-        // const filterData = (this.state.storeInfo==="전체")? 
-        // <PerformList data = {this.state.origin_performData}></PerformList> : <PerformList data = {this.state.filter_performData}></PerformList>;
-
         const filter_Data = ()=>{
             if(this.state.storeInfo==="전체"){
                 console.log("after Filter",this.state.filter_performData);
