@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import InfoWrapper from '../../component/InfoWrapper/InfoWrapper';
 import PerformList from '../../component/PerformList/PerformList';
 import * as service from '../../service/service';
+
 // import axios from 'axios';
+
 class InfoContainer extends Component {
     
     constructor(props){
