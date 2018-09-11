@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import InfoWrapper from '../../component/InfoWrapper/InfoWrapper';
 import PerformList from '../../component/PerformList/PerformList';
 import * as service from '../../service/service';
-
+// import NativeSelect from '@material-ui/core/NativeSelect';
 // import axios from 'axios';
-
+import '../../styles/infoWrapper.css';
+// import '../../App.css';
 class InfoContainer extends Component {
     
     constructor(props){
@@ -123,11 +124,11 @@ class InfoContainer extends Component {
         }
         
         return (   
-            <InfoWrapper>
-                <div>
+            <InfoWrapper >
+                <div className="txtCenter">
                     2018년 8월 11일 공연이 있습니다.  
                     <label> 가게 정보</label>
-                    <select value={this.state.storeInfo} onChange={this.handleChange}>
+                    <select native value={this.state.storeInfo} onChange={this.handleChange}>
                         {selectBox}
                     </select>
                 </div>

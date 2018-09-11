@@ -6,9 +6,9 @@ import InfoContainer from './container/infoContainer/InfoContainer';
 class App extends Component {
   render() {
     return (
-      <div>
+      <div > 
         <Header></Header>
-        <InfoContainer className="wrapper"></InfoContainer>        
+        <InfoContainer></InfoContainer>        
       {/* </Fragment> */}
       </div>
     );
