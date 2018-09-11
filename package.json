@@ -20,5 +20,17 @@
     "@material-ui/icons": "^2.0.3",
     "axios": "^0.18.0",
     "firebase-tools": "^4.2.1"
-  }
+  },
+  "description": "npm install  npm start",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DaeyunKim/num5PJ_frontend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DaeyunKim/num5PJ_frontend/issues"
+  },
+  "homepage": "https://github.com/DaeyunKim/num5PJ_frontend#readme"
 }
