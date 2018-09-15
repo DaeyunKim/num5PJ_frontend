@@ -14,6 +14,8 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { withStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import purple from '@material-ui/core/colors/purple';
 
 const styles = theme => ({
     card: {
@@ -39,7 +41,23 @@ const styles = theme => ({
     expandOpen: {
       transform: 'rotate(180deg)',
     },
+    progress: {
+        margin: theme.spacing.unit * 2,
+    }
   });
+
+  function CircularIndeterminate(props) {
+    const { classes } = props;
+    return (
+      <div>
+        <CircularProgress className={classes.progress} />
+        <CircularProgress className={classes.progress} size={50} />
+        <CircularProgress className={classes.progress} color="secondary" />
+        <CircularProgress className={classes.progress} style={{ color: purple[500] }} thickness={7} />
+      </div>
+    );
+  }
+  
 
 
 const PerformanceCard = ({date, performInfo, classes})=>{

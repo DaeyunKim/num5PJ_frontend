@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import InfoWrapper from '../../component/InfoWrapper/InfoWrapper';
 import PerformList from '../../component/PerformList/PerformList';
+import LoadingBar from '../../component/LoadingBar';
 import * as service from '../../service/service';
 // import NativeSelect from '@material-ui/core/NativeSelect';
 // import axios from 'axios';
 import '../../styles/infoWrapper.css';
-// import '../../App.css';
+
+const styles = theme => ({
+    progress: {
+      margin: theme.spacing.unit * 2,
+    },
+});
+
 class InfoContainer extends Component {
     
     constructor(props){
@@ -16,11 +23,10 @@ class InfoContainer extends Component {
             storeList:[],
             filter_performData:"",
         }
-        
-    }   
+    }  
 
     //selectBox 가게 정보 바뀔때 
-    handleChange=(e)=>{
+    handleChange= (e) => {
         let filterID = e.target.value;
         let performData = this.state.origin_performData;
     
@@ -49,54 +55,55 @@ class InfoContainer extends Component {
     }
 
     //데이터 받아오기전의 초기 상태 (default )
-    initData=()=>{
+    initData = () => {
         console.log("loadData");
-            const performData = [
+        const performData = [
+            {
+            date: new Date('1000-11-11').toLocaleDateString('se'),
+            performInfo : [
                 {
-                date: new Date('1000-11-11').toLocaleDateString('se'),
-                performInfo : [
-                    {
-                        PerformanceName : '데이터 로딩중',
-                        location : '잠시만 기다려주세요'
-                    }
-                ] 
+                    PerformanceName : '데이터 로딩중',
+                    location : '잠시만 기다려주세요'
                 }
-            ]
-            //데이터베이스에서 가게에 대한 정보만 가지고오는방법 vs 일자별 정보를 가지고와서 javascript에서 필터할때
-            const storeList = ["로딩중"] ;
+            ] 
+            }
+        ]
+        //데이터베이스에서 가게에 대한 정보만 가지고오는방법 vs 일자별 정보를 가지고와서 javascript에서 필터할 때
+        const storeList = ["로딩중"] ;
+        this.setState({
+            storeInfo: this.state.storeInfo,
+            storeList :storeList,
+            origin_performData: performData,
+            filter_performData:[],
+            loaded : false
+        });
+    }
+
+    /**
+     * Jazz 정보를 불러온다.
+     */
+    getJazzData = async () => {
+        //await 로 불러오기 
+        const storeList = ["전체"];
+         await service.getJazzInfo()
+         .then(response => {
+            console.log(response.data);
             this.setState({
                 storeInfo: this.state.storeInfo,
-                origin_performData: performData,
+                origin_performData: response.data.result,
                 storeList :storeList,
-                filter_performData:[]
-            });
-            
-    }
-    
-    //backend에서 불러오기
-    loadDatafromBack= async ()=>{
-
-        //await 로 불러오기 
-        const storeList = ["전체"] ;
-
-         await service.loadStoreInfo()
-         .then(response=>{
-            console.log(response.data);
-            console.log("resresrses");
-            this.setState({
-                        storeInfo: this.state.storeInfo,
-                        origin_performData: response.data.result,
-                        storeList :storeList,
-                        filter_performData:[]
+                filter_performData:[],
+                loaded : true
             });
          });
 
-        await service.loadStoreName()
-        .then(response=>{
+        await service.getStoreNames()
+        .then(response => {
             // response.data.result;
             response.data.result.splice(0, 0, "전체");
             this.setState({
-                ...this.state,storeList:response.data.result
+                ...this.state,storeList:response.data.result,
+                loaded : true
             })
         })
         
@@ -104,27 +111,28 @@ class InfoContainer extends Component {
     }
     componentWillMount(){
         this.initData();//default 데이터 로징 전에 출력 하는 곳 
-        this.loadDatafromBack();//데이터베이스를 설치 안할시에는 우선 이부분 주석처리하고 하기 
-        
+        this.getJazzData();//데이터베이스를 설치 안할시에는 우선 이부분 주석처리하고 하기 
     }
+
     render() {
- 
-        const selectBox = this.state.storeList.map((d,index)=>{
+        const selectBox = this.state.storeList.map((d,index) => {
             return <option key={index} value={d}>{d}</option>
         })
         //filter로 할지 아니면 전체로 할지 정하기 
-        const filter_Data = ()=>{
-            if(this.state.storeInfo==="전체"){
+        const filterData = () => {
+            if(this.state.storeInfo === "전체"){
                 // console.log("after Filter",this.state.filter_performData);
-                return <PerformList data = {this.state.origin_performData}></PerformList>;
+                return (!this.state.loaded) ?
+                <LoadingBar /> : <PerformList data = {this.state.origin_performData} />;
             }else{
                 // console.log("after Filter",this.state.filter_performData);
-                return <PerformList data = {this.state.filter_performData}></PerformList>;
+                return (!this.state.loaded) ?
+                <LoadingBar /> :  <PerformList data = {this.state.filter_performData} />;
             }
         }
-        
+
         return (   
-            <InfoWrapper >
+            <InfoWrapper>
                 <div className="txtCenter">
                     2018년 8월 11일 공연이 있습니다.  
                     <label> 가게 정보</label>
@@ -132,7 +140,7 @@ class InfoContainer extends Component {
                         {selectBox}
                     </select>
                 </div>
-                {filter_Data()}
+                {filterData()}
             </InfoWrapper>
         );
     }
