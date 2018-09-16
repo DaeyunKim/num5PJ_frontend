@@ -104,7 +104,7 @@ class InfoContainer extends Component {
 
     }
     componentWillMount(){
-        this.initData();//default 데이터 로징 전에 출력 하는 곳 
+        // this.initData();//default 데이터 로징 전에 출력 하는 곳 
         this.getJazzData();//데이터베이스를 설치 안할시에는 우선 이부분 주석처리하고 하기 
     }
 
