@@ -1,4 +1,4 @@
-import React, { Component,Fragment } from 'react';
+import React, { Component } from 'react';
 import Header from './container/header/Header';
 import InfoContainer from './container/infoContainer/InfoContainer';
 // import './styles/infoWrapper.css'

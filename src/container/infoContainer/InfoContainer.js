@@ -7,12 +7,6 @@ import * as service from '../../service/service';
 // import axios from 'axios';
 import '../../styles/infoWrapper.css';
 
-const styles = theme => ({
-    progress: {
-      margin: theme.spacing.unit * 2,
-    },
-});
-
 class InfoContainer extends Component {
     
     constructor(props){
@@ -136,7 +130,7 @@ class InfoContainer extends Component {
                 <div className="txtCenter">
                     2018년 8월 11일 공연이 있습니다.  
                     <label> 가게 정보</label>
-                    <select native value={this.state.storeInfo} onChange={this.handleChange}>
+                    <select native={"true"} value={this.state.storeInfo} onChange={this.handleChange}>
                         {selectBox}
                     </select>
                 </div>

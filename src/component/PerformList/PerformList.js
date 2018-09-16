@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import PerformanceCard from '../../component/PerformanceCard/PerformanceCard';
 import '../../styles/infoWrapper.css';
